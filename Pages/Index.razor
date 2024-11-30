@@ -1,0 +1,102 @@
+﻿@page "/"
+@inject DndExplorer.Services.DndService DndService
+
+<h3>Explore D&D Data</h3>
+
+<select @bind="selectedCategory" class="form-control">
+    <option value="races">Races</option>
+    <option value="classes">Classes</option>
+    <option value="spells">Spells</option>
+    <option value="monsters">Monsters</option>
+    <option value="equipment">Equipment</option>
+</select>
+<button class="btn btn-primary mt-2" @onclick="FetchList">Filter</button>
+
+<input @bind="searchTerm" placeholder="Search..." class="form-control mt-3" />
+<button class="btn btn-primary mt-2" @onclick="SearchList">Search</button>
+
+@if (pagedApiList != null)
+{
+    <div class="mt-3">
+        @foreach (var item in pagedApiList)
+        {
+            <div class="card-body" @onclick="() => FetchDetail(item.Index)">
+                <strong>@item.Name</strong>
+            </div>
+        }
+        <button class="btn btn-secondary" @onclick="PreviousPage" disabled="@(!CanPrevious)">Previous</button>
+        <button class="btn btn-secondary" @onclick="NextPage" disabled="@(!CanNext)">Next</button>
+    </div>
+}
+
+@if (selectedDetail != null)
+{
+    <div class="card mt-3">
+        <div class="card-body">
+            <h5 class="card-title">@selectedDetail.Name</h5>
+            @if (selectedDetail.Properties != null)
+            {
+                <ul>
+                    @foreach (var property in selectedDetail.Properties)
+                    {
+                        <li><strong>@property.Key:</strong> @property.Value</li>
+                    }
+                </ul>
+            }
+        </div>
+    </div>
+}
+
+@code {
+    private List<DndExplorer.Services.ApiResult> apiList;
+    private List<DndExplorer.Services.ApiResult> pagedApiList;
+    private DndExplorer.Services.ApiDetail selectedDetail;
+    private string selectedCategory = "races";
+    private string searchTerm = "";
+    private int currentPage = 0;
+    private int itemsPerPage = 12;
+
+    private async Task FetchList()
+    {
+        apiList = await DndService.GetApiListAsync(selectedCategory);
+        currentPage = 0;
+        UpdatePagedApiList();
+    }
+
+    private void SearchList()
+    {
+        apiList = apiList
+            .Where(item => item.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
+            .ToList();
+        currentPage = 0;
+        UpdatePagedApiList();
+    }
+
+    private void UpdatePagedApiList()
+    {
+        pagedApiList = apiList
+            .Skip(currentPage * itemsPerPage)
+            .Take(itemsPerPage)
+            .ToList();
+    }
+
+    private void NextPage()
+    {
+        currentPage++;
+        UpdatePagedApiList();
+    }
+
+    private void PreviousPage()
+    {
+        currentPage--;
+        UpdatePagedApiList();
+    }
+
+    private async Task FetchDetail(string index)
+    {
+        selectedDetail = await DndService.GetApiDetailAsync(selectedCategory, index);
+    }
+
+    private bool CanPrevious => currentPage > 0;
+    private bool CanNext => (currentPage + 1) * itemsPerPage < apiList.Count;
+}
