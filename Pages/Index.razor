@@ -10,61 +10,172 @@
     <option value="monsters">Monsters</option>
     <option value="equipment">Equipment</option>
 </select>
-<button class="btn btn-primary mt-2" @onclick="FetchList">Filter</button>
+<button class="btn btn-primary mt-2" @onclick="FetchList">Select</button>
 
 <input @bind="searchTerm" placeholder="Search..." class="form-control mt-3" />
 <button class="btn btn-primary mt-2" @onclick="SearchList">Search</button>
 
-@if (pagedApiList != null)
+@if (pagedApiList != null && pagedApiList.Any())
 {
     <div class="mt-3">
         @foreach (var item in pagedApiList)
         {
-            <div class="card-body" @onclick="() => FetchDetail(item.Index)">
+            <div class="card-body hover-card" @onclick="() => FetchDetail(item.Index)">
                 <strong>@item.Name</strong>
             </div>
         }
-        <button class="btn btn-secondary" @onclick="PreviousPage" disabled="@(!CanPrevious)">Previous</button>
-        <button class="btn btn-secondary" @onclick="NextPage" disabled="@(!CanNext)">Next</button>
+        <div class="d-flex justify-content-between mt-2">
+            <button class="btn btn-secondary" @onclick="PreviousPage" disabled="@(!CanPrevious)">Previous</button>
+            <button class="btn btn-secondary" @onclick="NextPage" disabled="@(!CanNext)">Next</button>
+        </div>
     </div>
+}
+else if (pagedApiList == null)
+{
+    <p class="text-muted mt-3">Select a category to begin.</p>
+}
+else
+{
+    <p class="text-danger mt-3">No results found.</p>
 }
 
 @if (selectedDetail != null)
 {
     <div class="card mt-3">
         <div class="card-body">
-            <h5 class="card-title">@selectedDetail.Name</h5>
-            @if (selectedDetail.Properties != null)
+            <h4 class="card-title">@selectedDetail.Name</h4>
+
+            @if (selectedCategory == "spells")
             {
-                <ul>
-                    @foreach (var property in selectedDetail.Properties)
-                    {
-                        <li><strong>@property.Key:</strong> @property.Value</li>
-                    }
-                </ul>
+                @if (selectedDetail.level != 0)
+                {
+                    <p><strong>Level:</strong> @selectedDetail.level</p>
+                }
+                else
+                {
+                    <p><strong>Level:</strong> Cantrip</p>
+                }
+                <p><strong>School:</strong> @selectedDetail.school?.name</p> 
+                @if (selectedDetail.damage?.damage_type != null)
+                {
+                    <p><strong>Damage Type:</strong> @selectedDetail.damage.damage_type.name</p> 
+                }
+                else
+                {
+                    <p><strong>Damage Type:</strong> Does not deal damage</p>
+                }
+                <p><strong>Duration:</strong> @selectedDetail.duration</p>
+                <p><strong>Concentration:</strong> @(selectedDetail.concentration ? "Yes" : "No")</p>
+                <p><strong>Casting Time:</strong> @selectedDetail.casting_time</p>
+                <p><strong>Components:</strong> @string.Join(", ", selectedDetail.components ?? new List<string>())</p>
+                <p><strong>Description:</strong> @string.Join(", ", selectedDetail.desc ?? new List<string>())</p>
             }
+            else if (selectedCategory == "races")
+            {
+                <p><strong>Name:</strong> @selectedDetail.Name</p>
+            }
+
+            else if (selectedCategory == "classes")
+            {
+                <p><strong>Hit Die:</strong> @selectedDetail.hit_die</p>
+                <p><strong>Subclasses:</strong> @string.Join(", ", selectedDetail.subclasses?.Select(s => s.name) ?? new List<string>())</p>
+                <p><strong>Proficiencies:</strong> @string.Join(", ", selectedDetail.proficiencies?.Select(p => p.name) ?? new List<string>())</p>
+                <p><strong>Proficiencies Choices:</strong> @string.Join(", ", selectedDetail.proficiency_choices?.Select(p => p.desc) ?? new List<string>())</p>
+                @if (selectedDetail.spellcasting != null)
+                {
+                    <p><strong>Spellcasting Ability:</strong> @selectedDetail.spellcasting.spellcasting_ability?.name</p>
+                    @if (selectedDetail.spellcasting.info != null && selectedDetail.spellcasting.info.Any())
+                    {
+                        foreach (var info in selectedDetail.spellcasting.info)
+                        {
+                            <p><strong>@info.name:</strong> @string.Join(", ", info.desc ?? new List<string>())</p>
+                        }
+                    }
+                }
+                else
+                {
+                    <p><strong>Spellcasting:</strong> None</p>
+                }
+
+        }
+            else if (selectedCategory == "monsters")
+            {
+                <p><strong>Armor Class:</strong> @(selectedDetail.armor_class?.FirstOrDefault()?.value)</p>
+                <p><strong>Hit Points:</strong> @(selectedDetail.hit_points)</p>
+                <p><strong>Challenge Rating:</strong> @(selectedDetail.challenge_rating)</p>
+                <p><strong>Speed:</strong> @selectedDetail.speed.walk</p>
+                <p><strong>Actions:</strong> @string.Join(", ", selectedDetail.actions?.Select(a => a.name) ?? new List<string>())</p>
+
+                <h4>Ability Scores:</h4>
+                <ul>
+                    <li><strong>Strength:</strong> @selectedDetail.strength</li>
+                    <li><strong>Dexterity:</strong> @selectedDetail.dexterity</li>
+                    <li><strong>Constitution:</strong> @selectedDetail.constitution</li>
+                    <li><strong>Intelligence:</strong> @selectedDetail.intelligence</li>
+                    <li><strong>Wisdom:</strong> @selectedDetail.wisdom</li>
+                    <li><strong>Charisma:</strong> @selectedDetail.charisma</li>
+                </ul>
+
+                @if (selectedDetail.special_abilities?.Any() == true)
+                {
+                    <h4>Special Abilities:</h4>
+                    <ul>
+                        @foreach (var ability in selectedDetail.special_abilities)
+                        {
+                            <li>@ability.name: @ability.desc</li>
+                        }
+                    </ul>
+                }
+
+                @if (@selectedDetail.languages != "") 
+                {
+                    <p><strong>Languages:</strong>@selectedDetail.languages</p>
+                }
+                else
+                {
+                    <p><strong>Languages:</strong> None</p>
+                }
+
+
+        }
+            else if (selectedCategory == "equipment")
+            {
+                <p><strong>Weight:</strong> @(selectedDetail.weight)</p>
+                <p><strong>Cost:</strong> @selectedDetail.cost.quantity</p>
+                <p><strong>Description:</strong> @string.Join(", ", selectedDetail.desc ?? new List<string>())</p>
+                <p><strong>Equipment Category:</strong> @(selectedDetail.equipment_category?.name)</p>
+            }
+
         </div>
     </div>
 }
 
+
+
 @code {
-    private List<DndExplorer.Services.ApiResult> apiList;
-    private List<DndExplorer.Services.ApiResult> pagedApiList;
-    private DndExplorer.Services.ApiDetail selectedDetail;
+    private List<DndExplorer.Services.ApiResult> apiList = new();
+    private List<DndExplorer.Services.ApiResult> pagedApiList = new();
+    private DndExplorer.Services.ApiDetailResponse selectedDetail;
     private string selectedCategory = "races";
     private string searchTerm = "";
     private int currentPage = 0;
-    private int itemsPerPage = 12;
+    private int itemsPerPage = 5;
 
     private async Task FetchList()
     {
-        apiList = await DndService.GetApiListAsync(selectedCategory);
+        apiList = await DndService.GetApiListAsync(selectedCategory) ?? new();
         currentPage = 0;
         UpdatePagedApiList();
     }
 
     private void SearchList()
     {
+        if (string.IsNullOrWhiteSpace(searchTerm))
+        {
+            UpdatePagedApiList();
+            return;
+        }
+
         apiList = apiList
             .Where(item => item.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
             .ToList();
@@ -82,14 +193,20 @@
 
     private void NextPage()
     {
-        currentPage++;
-        UpdatePagedApiList();
+        if (CanNext)
+        {
+            currentPage++;
+            UpdatePagedApiList();
+        }
     }
 
     private void PreviousPage()
     {
-        currentPage--;
-        UpdatePagedApiList();
+        if (CanPrevious)
+        {
+            currentPage--;
+            UpdatePagedApiList();
+        }
     }
 
     private async Task FetchDetail(string index)

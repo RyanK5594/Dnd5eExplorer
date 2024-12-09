@@ -10,7 +10,7 @@ body {
 /* Header styles */
 h1, h2, h3 {
     font-family: 'Cinzel Decorative', serif;
-    color: #ff4444;
+    color: #f0f0f0;
     text-shadow: 2px 2px 5px #000;
     text-align: center;
 }
@@ -55,6 +55,16 @@ button {
     padding: 20px;
     margin: 20px;
     color: #ffdddd;
+}
+
+
+.hover-card {
+    transition: background-color 0.3s ease;
+}
+
+.hover-card:hover {
+    background-color: #f0f0f0;
+    cursor: pointer;
 }
 
 /* Inputs */
