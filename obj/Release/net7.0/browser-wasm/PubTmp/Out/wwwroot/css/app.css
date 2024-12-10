@@ -1,0 +1,157 @@
+/* Base styles for body */
+body {
+    background: radial-gradient(circle, black, #660000);
+    font-family: 'Cinzel', serif; /* A font with a medieval style */
+    color: #ffdddd;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header styles */
+h1, h2, h3 {
+    font-family: 'Cinzel Decorative', serif;
+    color: #f0f0f0;
+    text-shadow: 2px 2px 5px #000;
+    text-align: center;
+}
+
+/* Links */
+a {
+    color: #ff6666;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease-in-out;
+}
+
+    a:hover {
+        color: #ff9999;
+        text-shadow: 0px 0px 5px #ff4444;
+    }
+
+/* Buttons */
+button {
+    background-color: #660000;
+    color: #ffdddd;
+    border: 2px solid #ff4444;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+    button:hover {
+        background-color: #ff4444;
+        box-shadow: 0px 0px 10px #ff7777;
+    }
+
+/* Cards or Panels */
+.card {
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid #660000;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px #660000;
+    padding: 20px;
+    margin: 20px;
+    color: #ffdddd;
+}
+
+
+.hover-card {
+    transition: background-color 0.3s ease;
+}
+
+.hover-card:hover {
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
+
+/* Inputs */
+input, textarea {
+    background-color: #330000;
+    color: #ffdddd;
+    border: 1px solid #ff4444;
+    border-radius: 5px;
+    padding: 10px;
+    font-family: 'Cinzel', serif;
+}
+
+    input:focus, textarea:focus {
+        border: 2px solid #ff7777;
+        outline: none;
+        box-shadow: 0px 0px 10px #ff4444;
+    }
+
+/* Footer */
+footer {
+    background: #330000;
+    color: #ffdddd;
+    text-align: center;
+    padding: 10px;
+    border-top: 2px solid #660000;
+}
+
+/* Fancy List Styling */
+ul {
+    list-style-type: square;
+    list-style-position: inside;
+    padding: 0;
+}
+
+li {
+    margin: 10px 0;
+    color: #ffcccc;
+}
+
+/* Fantasy Borders */
+.fantasy-border {
+    border: 3px solid #ff4444;
+    border-radius: 15px;
+    padding: 15px;
+    background: linear-gradient(135deg, rgba(102, 0, 0, 0.7), rgba(0, 0, 0, 0.9));
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    color: #ffdddd;
+}
+
+th, td {
+    border: 1px solid #660000;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background: #660000;
+    color: #ffdddd;
+}
+
+td {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+/* Glow effect for specific elements */
+.glow {
+    color: #ff5555;
+    text-shadow: 0px 0px 8px #ff4444, 0px 0px 15px #ff6666;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+    background: #330000;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #660000;
+    border-radius: 5px;
+}
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #ff4444;
+    }

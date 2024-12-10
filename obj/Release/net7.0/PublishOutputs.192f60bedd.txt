@@ -1,0 +1,8 @@
+C:\Users\ryanj\OneDrive - Technological University Dublin\Enterprise App Dev\DndExplorer\obj\Release\net7.0\browser-wasm\PubTmp\Out\testhost.exe
+C:\Users\ryanj\OneDrive - Technological University Dublin\Enterprise App Dev\DndExplorer\obj\Release\net7.0\browser-wasm\PubTmp\Out\selenium-manager\linux\selenium-manager
+C:\Users\ryanj\OneDrive - Technological University Dublin\Enterprise App Dev\DndExplorer\obj\Release\net7.0\browser-wasm\PubTmp\Out\selenium-manager\macos\selenium-manager
+C:\Users\ryanj\OneDrive - Technological University Dublin\Enterprise App Dev\DndExplorer\obj\Release\net7.0\browser-wasm\PubTmp\Out\selenium-manager\windows\selenium-manager.exe
+C:\Users\ryanj\OneDrive - Technological University Dublin\Enterprise App Dev\DndExplorer\obj\Release\net7.0\browser-wasm\PubTmp\Out\xunit.runner.visualstudio.testadapter.dll
+C:\Users\ryanj\OneDrive - Technological University Dublin\Enterprise App Dev\DndExplorer\obj\Release\net7.0\browser-wasm\PubTmp\Out\xunit.runner.reporters.netcoreapp10.dll
+C:\Users\ryanj\OneDrive - Technological University Dublin\Enterprise App Dev\DndExplorer\obj\Release\net7.0\browser-wasm\PubTmp\Out\xunit.runner.utility.netcoreapp10.dll
+C:\Users\ryanj\OneDrive - Technological University Dublin\Enterprise App Dev\DndExplorer\obj\Release\net7.0\browser-wasm\PubTmp\Out\web.config
