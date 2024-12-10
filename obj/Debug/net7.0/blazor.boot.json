@@ -213,13 +213,13 @@
       "mscorlib.dll": "sha256-X+o60j6cZnlI2vFFjdH81yYTAxx13\/wqnNSWTKbDsyw=",
       "netstandard.dll": "sha256-Cr6slBs\/R2v2t\/vecFDHbQHakbEhar0adYu0YemwiXI=",
       "System.Private.CoreLib.dll": "sha256-dDw5nzGJhW1jOjGfSJcs\/Mi4KQ+DZygXnoK+vJ+jHyk=",
-      "DndExplorer.dll": "sha256-RKvKTsYXGOy80YNIoJPqtCR1ua7ddMNacWlo2o4Si9A="
+      "DndExplorer.dll": "sha256-4bYb6NqvNW5Cj3vZjQjAdQBj6vVut4t1lGa8tupTaGU="
     },
     "extensions": null,
     "lazyAssembly": null,
     "libraryInitializers": null,
     "pdb": {
-      "DndExplorer.pdb": "sha256-r+amX2pZm9Ups+e9bJ5ihTuwpxcOif7yix2f6PAkyZc="
+      "DndExplorer.pdb": "sha256-AxYCGL7\/RFMqwwmWc9JqKl19fFHenNzWPb9wbSIAOWA="
     },
     "runtime": {
       "dotnet.7.0.11.olctaxto8r.js": "sha256-RtIVigdAD1mUvR4pxoKyD8kcQgw4INP81v+PVSqkeQY=",

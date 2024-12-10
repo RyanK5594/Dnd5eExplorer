@@ -4,7 +4,6 @@
 <h3>Explore D&D Data</h3>
 
 <select @bind="selectedCategory" class="form-control">
-    <option value="races">Races</option>
     <option value="classes">Classes</option>
     <option value="spells">Spells</option>
     <option value="monsters">Monsters</option>
@@ -69,10 +68,6 @@ else
                 <p><strong>Casting Time:</strong> @selectedDetail.casting_time</p>
                 <p><strong>Components:</strong> @string.Join(", ", selectedDetail.components ?? new List<string>())</p>
                 <p><strong>Description:</strong> @string.Join(", ", selectedDetail.desc ?? new List<string>())</p>
-            }
-            else if (selectedCategory == "races")
-            {
-                <p><strong>Name:</strong> @selectedDetail.Name</p>
             }
 
             else if (selectedCategory == "classes")
@@ -156,7 +151,7 @@ else
     private List<DndExplorer.Services.ApiResult> apiList = new();
     private List<DndExplorer.Services.ApiResult> pagedApiList = new();
     private DndExplorer.Services.ApiDetailResponse selectedDetail;
-    private string selectedCategory = "races";
+    private string selectedCategory = "classes";
     private string searchTerm = "";
     private int currentPage = 0;
     private int itemsPerPage = 5;

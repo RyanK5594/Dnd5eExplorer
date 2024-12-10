@@ -71,15 +71,10 @@ namespace DndExplorer.Services
         public List<ProficiencyChoice> proficiency_choices { get; set; }
         public List<Proficiency> proficiencies { get; set; }
         public List<SavingThrow> saving_throws { get; set; }
-        public List<StartingEquipment> starting_equipment { get; set; }
-        public List<StartingEquipmentOption> starting_equipment_options { get; set; }
-        public string class_levels { get; set; }
-        public MultiClassing multi_classing { get; set; }
         public List<Subclass> subclasses { get; set; }
         public Spellcasting spellcasting { get; set; }
         public string spells { get; set; }
         public List<string> desc { get; set; }
-        public List<string> higher_level { get; set; }
         public string range { get; set; }
         public List<string> components { get; set; }
         public string material { get; set; }
@@ -89,8 +84,6 @@ namespace DndExplorer.Services
         public string casting_time { get; set; }
         public int level { get; set; }
         public Damage damage { get; set; }
-        public Dc dc { get; set; }
-        public AreaOfEffect area_of_effect { get; set; }
         public School school { get; set; }
         public List<Class> classes { get; set; }
         public string size { get; set; }
@@ -107,39 +100,24 @@ namespace DndExplorer.Services
         public int intelligence { get; set; }
         public int wisdom { get; set; }
         public int charisma { get; set; }
-        public List<object> damage_vulnerabilities { get; set; }
-        public List<object> damage_resistances { get; set; }
-        public List<object> damage_immunities { get; set; }
-        public List<object> condition_immunities { get; set; }
-        public Senses senses { get; set; }
         public string languages { get; set; }
         public int challenge_rating { get; set; }
-        public int proficiency_bonus { get; set; }
-        public int xp { get; set; }
         public List<SpecialAbility> special_abilities { get; set; }
         public List<Action> actions { get; set; }
         public List<object> legendary_actions { get; set; }
         public List<AbilityBonuse> ability_bonuses { get; set; }
-        public string age { get; set; }
         public string size_description { get; set; }
         public List<object> starting_proficiencies { get; set; }
         public string language_desc { get; set; }
-        public List<Trait> traits { get; set; }
-        public List<object> subraces { get; set; }
         public List<object> special { get; set; }
         public EquipmentCategory equipment_category { get; set; }
-        public string weapon_category { get; set; }
-        public string weapon_range { get; set; }
         public string category_range { get; set; }
         public Cost cost { get; set; }
         public int weight { get; set; }
         public List<Property> properties { get; set; }
-        public TwoHandedDamage two_handed_damage { get; set; }
         public List<object> contents { get; set; }
         public int ability_score_bonuses { get; set; }
         public int prof_bonus { get; set; }
-        public List<Feature> features { get; set; }
-        public ClassSpecific class_specific { get; set; }
         public string index { get; set; }
         public Class @class { get; set; }
         public LanguageOptions language_options { get; set; }
@@ -392,13 +370,6 @@ namespace DndExplorer.Services
         public int bonus { get; set; }
     }
 
-    public class Trait
-    {
-        public string index { get; set; }
-        public string name { get; set; }
-        public string url { get; set; }
-    }
-
     public class Cost
     {
         public int quantity { get; set; }
@@ -406,25 +377,6 @@ namespace DndExplorer.Services
     }
 
     public class Property
-    {
-        public string index { get; set; }
-        public string name { get; set; }
-        public string url { get; set; }
-    }
-
-    public class TwoHandedDamage
-    {
-        public string damage_dice { get; set; }
-        public DamageType damage_type { get; set; }
-    }
-
-
-    public class ClassSpecific
-    {
-        public int aura_range { get; set; }
-    }
-
-    public class Feature
     {
         public string index { get; set; }
         public string name { get; set; }
